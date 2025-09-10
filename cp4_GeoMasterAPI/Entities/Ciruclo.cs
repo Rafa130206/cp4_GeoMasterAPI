@@ -6,7 +6,7 @@ namespace cp4_GeoMasterAPI.Entities
     {
         public double Raio {  get; set; }
 
-        public double CalcularArea() => Math.PI * (Raio * Raio);
+        public double CalcularArea() => Math.PI * Math.Pow(Raio, 2);
         public double CalcularPerimetro() => 2 * Math.PI * Raio;
     }
 }
