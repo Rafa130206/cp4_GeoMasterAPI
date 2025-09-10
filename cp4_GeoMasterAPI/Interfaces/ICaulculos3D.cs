@@ -2,5 +2,7 @@
 {
     public interface ICaulculos3D
     {
+        double CalcularVolume();
+        double CalcularAreaSuperficial();
     }
 }
