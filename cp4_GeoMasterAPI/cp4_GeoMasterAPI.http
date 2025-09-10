@@ -1,0 +1,6 @@
+@cp4_GeoMasterAPI_HostAddress = http://localhost:5147
+
+GET {{cp4_GeoMasterAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
