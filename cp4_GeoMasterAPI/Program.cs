@@ -1,3 +1,6 @@
+using cp4_GeoMasterAPI.Service;
+using cp4_GeoMasterAPI.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<ICalculadoraService, CalculadoraService>();
 
 var app = builder.Build();
 
