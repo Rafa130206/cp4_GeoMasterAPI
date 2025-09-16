@@ -8,6 +8,6 @@ namespace cp4_GeoMasterAPI.Entities
         public double Altura { get; set; }
 
         public double CalcularArea() => Largura * Altura;
-        public double CalcularPerimetro() => 2 * (Largura * Altura);
+        public double CalcularPerimetro() => 2 * (Largura + Altura);
     }
 }

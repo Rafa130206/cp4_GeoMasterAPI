@@ -4,37 +4,27 @@ namespace cp4_GeoMasterAPI.Service
 {
     public class CalculadoraService : ICalculadoraService
     {
-        public double CalcularArea(object forma)
-        {
-            if (forma is ICalculos2D f2d)
-                return f2d.CalcularArea();
+        // ---- API pública exigida (DIP) ----
+        public double CalcularArea(object forma) => Invoke(() => CalcularArea((dynamic)forma), nameof(CalcularArea), forma);
+        public double CalcularPerimetro(object forma) => Invoke(() => CalcularPerimetro((dynamic)forma), nameof(CalcularPerimetro), forma);
+        public double CalcularVolume(object forma) => Invoke(() => CalcularVolume((dynamic)forma), nameof(CalcularVolume), forma);
+        public double CalcularAreaSuperficial(object forma) => Invoke(() => CalcularAreaSuperficial((dynamic)forma), nameof(CalcularAreaSuperficial), forma);
 
-            throw new NotSupportedException($"A forma {forma.GetType().Name} não suporta cálculo de área.");
+        // ---- Mecanismo central sem if/switch ----
+        private static T Invoke<T>(Func<T> action, string operacao, object forma)
+        {
+            try { return action(); }
+            catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException)
+            {
+                throw new NotSupportedException(
+                    $"A forma {forma?.GetType().Name ?? "<null>"} não suporta a operação {operacao}.");
+            }
         }
 
-        public double CalcularPerimetro(object forma)
-        {
-            if (forma is ICalculos2D f2d)
-                return f2d.CalcularPerimetro();
-
-            throw new NotSupportedException($"A forma {forma.GetType().Name} não suporta cálculo de perímetro.");
-        }
-
-        public double CalcularVolume(object forma)
-        {
-            if (forma is ICalculos3D f3d)
-                return f3d.CalcularVolume();
-
-            throw new NotSupportedException($"A forma {forma.GetType().Name} não suporta cálculo de volume.");
-        }
-
-        public double CalcularAreaSuperficial(object forma)
-        {
-            if (forma is ICalculos3D f3d)
-                return f3d.CalcularAreaSuperficial();
-
-            throw new NotSupportedException($"A forma {forma.GetType().Name} não suporta cálculo de área superficial.");
-        }
+        // ---- Sobrecargas-alvo (abrindo por extensao das interfaces) ----
+        private double CalcularArea(ICalculos2D f) => f.CalcularArea();
+        private double CalcularPerimetro(ICalculos2D f) => f.CalcularPerimetro();
+        private double CalcularVolume(ICalculos3D f) => f.CalcularVolume();
+        private double CalcularAreaSuperficial(ICalculos3D f) => f.CalcularAreaSuperficial();
     }
-
 }
