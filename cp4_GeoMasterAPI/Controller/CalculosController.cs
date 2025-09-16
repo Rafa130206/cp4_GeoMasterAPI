@@ -13,14 +13,24 @@ namespace cp4_GeoMasterAPI.Controller
     public class CalculosController : ControllerBase
     {
 
+
         private readonly ICalculadoraService _service;
 
         public CalculosController(ICalculadoraService service)
         {
             _service = service;
         }
-
+        /// <summary>
+        /// Calcula área de formas 2D
+        /// </summary>
+        /// <remarks>
+        /// Retorna um valor do tipo double.
+        /// </remarks>
+        /// <returns>Área calculada</returns>
+       
         [HttpPost("area")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CalcularArea([FromBody] FormaDTO formaDto)
         {
 
@@ -49,7 +59,16 @@ namespace cp4_GeoMasterAPI.Controller
                  return Ok(new { area = resultado });
         }
 
+        /// <summary>
+        /// Calcula perimetro de formas 2D
+        /// </summary>
+        /// <remarks>
+        /// Retorna um valor do tipo double.
+        /// </remarks>
+        /// <returns>Perimetro calculado</returns>
         [HttpPost("perimetro")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CalcularPerimetro([FromBody] FormaDTO formaDto)
         {
             ICalculos2D forma = formaDto.TipoForma.ToLower() switch
@@ -76,7 +95,17 @@ namespace cp4_GeoMasterAPI.Controller
             return Ok(new { perimetro = resultado });
         }
 
+        /// <summary>
+        /// Calcula volume de formas 3D
+        /// </summary>
+        /// <remarks>
+        /// Retorna um valor do tipo double.
+        /// </remarks>
+        /// <returns>Volume calculado</returns>
+
         [HttpPost("volume")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CalcularVolume([FromBody] FormaDTO formaDto)
         {
             ICalculos3D forma = formaDto.TipoForma.ToLower() switch
@@ -102,7 +131,16 @@ namespace cp4_GeoMasterAPI.Controller
             return Ok(new { volume = resultado });
         }
 
+        /// <summary>
+        /// Calcula área de formas 3D
+        /// </summary>
+        /// <remarks>
+        /// Retorna um valor do tipo double.
+        /// </remarks>
+        /// <returns>Área calculada</returns>
         [HttpPost("areaSuperficial")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CalcularAreaSuperficial([FromBody] FormaDTO formaDto)
         {
             ICalculos3D forma = formaDto.TipoForma.ToLower() switch

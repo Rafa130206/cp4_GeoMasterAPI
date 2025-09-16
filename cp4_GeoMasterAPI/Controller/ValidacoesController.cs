@@ -9,6 +9,9 @@ namespace cp4_GeoMasterAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/validacoes")]
+    [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
     public class ValidacoesController : ControllerBase
     {
         private readonly IValidacaoContencaoService _svc;
