@@ -22,7 +22,13 @@ namespace cp4_GeoMasterAPI.Controllers
 
         public ValidacoesController(IValidacaoContencaoService svc) => _svc = svc;
 
-        /// <summary>Verifica se a formaInterna pode ser contida dentro da formaExterna.</summary>
+        /// <summary>
+        /// Verifica se uma forma está contida dentro de outra
+        /// </summary>
+        /// <remarks>
+        /// Retorna um valor booleano.
+        /// </remarks>
+        /// <returns>True se a forma interna estiver contida, False caso contrário</returns>
         [HttpPost("forma-contida")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
