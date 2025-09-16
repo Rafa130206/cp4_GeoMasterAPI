@@ -17,6 +17,7 @@ namespace cp4_GeoMasterAPI.Controllers
         private readonly IValidacaoContencaoService _svc;
         private static readonly JsonSerializerOptions _jsonOptions = new()
         {
+            PropertyNameCaseInsensitive = true,
             Converters = { new Forma2DJsonConverter() }
         };
 

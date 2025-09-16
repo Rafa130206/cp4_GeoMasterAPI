@@ -21,10 +21,10 @@ builder.Services.AddSwaggerGen( options =>
     );
 builder.Services.AddControllers();
 builder.Services.AddScoped<ICalculadoraService, CalculadoraService>();
-builder.Services.AddSingleton<IContainmentRule<Retangulo, Circulo>, RetanguloCirculoRule>();
-builder.Services.AddSingleton<IContainmentRule<Circulo, Retangulo>, CirculoRetanguloRule>();
-builder.Services.AddSingleton<IContainmentRule<Circulo, Circulo>, CirculoCirculoRule>();
-builder.Services.AddSingleton<IContainmentRule<Retangulo, Retangulo>, RetanguloRetanguloRule>();
+builder.Services.AddSingleton<IContainmentRuleBase, RetanguloCirculoRule>();
+builder.Services.AddSingleton<IContainmentRuleBase, CirculoRetanguloRule>();
+builder.Services.AddSingleton<IContainmentRuleBase, CirculoCirculoRule>();
+builder.Services.AddSingleton<IContainmentRuleBase, RetanguloRetanguloRule>();
 
 // Motor de validação + regras
 builder.Services.AddTransient<IValidacaoContencaoService, ValidacaoContencaoService>();
